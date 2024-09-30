@@ -1,1 +1,0 @@
-This branch is used to serve static files (using github pages), for Helm repository.
