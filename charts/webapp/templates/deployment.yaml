@@ -50,6 +50,6 @@ spec:
         #   failureThreshold: 3
         #   periodSeconds: 10
         ports:
-        - containerPort:  3000
+        - containerPort:  80
           name:  nodejs-port
       restartPolicy: Always
