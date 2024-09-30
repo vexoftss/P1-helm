@@ -3,9 +3,7 @@ name: Publish Helm Charts
 on:
   push:
     branches:
-      - main  # Replace with your default branch
-    paths:
-      - 'charts/**'  # Trigger when changes occur in the charts directory
+      - main
 
 jobs:
   publish:
