@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.appName }}-actuator-service
+  labels:
+    operated-prometheus: 'true'
+    release: prometheus
+    app: actuator-service
+spec:
+  selector:
+    app: {{ .Values.appName }}
+  type: ClusterIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 300
+  ports:
+  - name: actuator-port
+    protocol: TCP
+    port: {{ .Values.actuatorServicePort }}
+    targetPort: {{ .Values.actuatorContainerPort }}

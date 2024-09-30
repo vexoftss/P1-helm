@@ -1,0 +1,43 @@
+name: Publish Helm Charts
+
+on:
+  push:
+    branches:
+      - main  # Replace with your default branch
+    paths:
+      - 'charts/**'  # Trigger when changes occur in the charts directory
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v4.2.0
+        with:
+          version: v3.16.1
+
+      - name: Package Helm Charts
+        run: |
+          mkdir -p .tmp/charts
+          for chart_dir in charts/*/; do
+          if [ -d "$chart_dir" ]; then
+           helm package "$chart_dir" --destination .tmp/charts/
+          fi
+          done
+
+      - name: Update Helm Repo Index
+        run: |
+          helm repo index .tmp/charts/ --url https://vexoftss.github.io/P1-helm/
+
+      - name: Deploy to github-pages Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .tmp/charts
+          publish_branch: github-pages
+          user_name: 'GitHub Actions'
+          user_email: 'actions@github.com'

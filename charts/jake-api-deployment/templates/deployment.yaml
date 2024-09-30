@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: default
+  labels:
+    app: {{ .Values.appName }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: {{ .Values.appName }}
+        image: {{ .Values.podImage }}
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 600m
+            memory: 900Mi
+          requests:
+            cpu: 200m
+            memory: 500Mi
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: {{ .Values.actuatorContainerPort }}
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness 
+            port: {{ .Values.actuatorContainerPort }}
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 5
+          periodSeconds: 10
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+          name: {{ .Values.containerPortName }}
+      restartPolicy: Always

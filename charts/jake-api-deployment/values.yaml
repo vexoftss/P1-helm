@@ -1,0 +1,10 @@
+appName: demo-api
+podImage: "robertpirvanus/api-demo:1.0.0-SNAPSHOT"
+containerPortName: http
+containerPort: 8080
+servicePort: 80
+actuatorContainerPort: 9000
+actuatorServicePort: 9000
+hostName: api.vexoft.com
+# hostName: grfana.20.4.92.154.nip.io
+# hostName: apl2.20.4.92.154.nip.io
