@@ -3,12 +3,12 @@ entries:
   jake-api-deploy:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-09-30T14:27:02.685049131Z"
+    created: "2024-09-30T14:58:19.366555082Z"
     description: A Helm chart for Kubernetes
-    digest: 653bd8384e7481ffd3545fc7104e8288ea5048d278abaf6ec3f10d1d1dd9f7e6
+    digest: c748375147cf4fafdf5e666c6dcacd1b1a263b72cc70c85ebea7cf56873652c9
     name: jake-api-deploy
     type: application
     urls:
     - https://vexoftss.github.io/P1-helm/jake-api-deploy-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-30T14:27:02.684734708Z"
+generated: "2024-09-30T14:58:19.366073202Z"
