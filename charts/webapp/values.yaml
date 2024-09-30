@@ -1,0 +1,4 @@
+appName: <appname>
+image: "robertpirvanus/<imagename>:latest"
+ingressHost: <subdomain>.vexoft.com
+namespace: default
