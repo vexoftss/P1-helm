@@ -1,9 +1,10 @@
+{{- if .Values.serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
   name: {{ .Values.appName }}-service-monitor
-  namespace: default
+  namespace: {{ .Values.namespace }}
 spec:
   endpoints:
   - interval: 30s
@@ -12,4 +13,5 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.appName }}-service
+{{- end }}
       
