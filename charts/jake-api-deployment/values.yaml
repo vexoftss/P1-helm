@@ -1,5 +1,5 @@
 appName: demo-api
-podImage: "robertpirvanus/api-demo:1.0.0-SNAPSHOT"
+appImage: "robertpirvanus/api-demo:1.0.0-SNAPSHOT"
 containerPortName: http
 containerPort: 8080
 servicePort: 80
