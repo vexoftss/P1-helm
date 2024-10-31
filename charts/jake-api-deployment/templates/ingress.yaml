@@ -1,4 +1,4 @@
-
+{{- if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -13,8 +13,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  # - host: {{ .Values.appName }}.{{ .Values.hostName }}
-  - host: {{ .Values.hostName }}
+  - host: {{ .Values.ingress.hostName }}
     http:
       paths:
       - path: /
@@ -26,5 +25,6 @@ spec:
               name: http
   tls:
   - hosts:
-    - {{ .Values.hostName }}
+    - {{ .Values.ingress.hostName }}
     secretName: vexoft-com-tls-secret-{{ .Values.appName }}
+{{- end }}
