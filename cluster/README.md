@@ -1,0 +1,1 @@
+this directory is used to store variables and other useful information to build the Kubernetess cluster
