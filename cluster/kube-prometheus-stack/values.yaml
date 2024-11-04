@@ -1,0 +1,95 @@
+## Override the deployment namespace
+##
+namespaceOverride: kube-prometheus-stack
+
+grafana:
+  enabled: true
+  namespaceOverride: kube-prometheus-stack
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-redirect-from: http://
+      nginx.ingress.kubernetes.io/proxy-redirect-to: https://
+    hosts:
+    - grafana.vexoft.com
+    tls:
+    - secretName: vexoft-com-tls-secret-grafana
+      hosts:
+      - grafana.vexoft.com
+  grafana.ini:
+    auth:
+      disable_login_form: true
+    auth.generic_oauth:
+      enabled: true
+      name: Vexoft
+      auto_login: true
+      allow_sign_up: true
+      client_id: grafana
+      # client_secret: YOUR_CLIENT_SECRET
+      scopes: openid email profile offline_access roles
+      email_attribute_path: email
+      login_attribute_path: username
+      name_attribute_path: full_name
+      auth_url: https://keycloak.vexoft.com/realms/vexoft/protocol/openid-connect/auth
+      token_url: https://keycloak.vexoft.com/realms/vexoft/protocol/openid-connect/token
+      api_url: https://keycloak.vexoft.com/realms/vexoft/protocol/openid-connect/userinfo
+      role_attribute_path: contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
+    server:
+      root_url: https://grafana.vexoft.com
+      serve_from_sub_path: true
+
+alertmanager:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+    - alertmanager.vexoft.com
+    tls:
+    - secretName: vexoft-com-tls-secret-altermanager
+      hosts:
+      - alertmanager.vexoft.com
+
+## Create default rules for monitoring the cluster
+##
+defaultRules:
+  create: true
+  rules:
+    alertmanager: true
+    etcd: false
+    configReloaders: false
+    general: false
+    k8sContainerCpuUsageSecondsTotal: false
+    k8sContainerMemoryCache: false
+    k8sContainerMemoryRss: false
+    k8sContainerMemorySwap: false
+    k8sContainerResource: false
+    k8sContainerMemoryWorkingSetBytes: false
+    k8sPodOwner: false
+    kubeApiserverAvailability: false
+    kubeApiserverBurnrate: false
+    kubeApiserverHistogram: false
+    kubeApiserverSlos: false
+    kubeControllerManager: false
+    kubelet: false
+    kubeProxy: false
+    kubePrometheusGeneral: false
+    kubePrometheusNodeRecording: false
+    kubernetesApps: false
+    kubernetesResources: false
+    kubernetesStorage: false
+    kubernetesSystem: false
+    kubeSchedulerAlerting: false
+    kubeSchedulerRecording: false
+    kubeStateMetrics: false
+    network: false
+    node: false
+    nodeExporterAlerting: false
+    nodeExporterRecording: false
+    prometheus: false
+    prometheusOperator: false
+    windows: false
