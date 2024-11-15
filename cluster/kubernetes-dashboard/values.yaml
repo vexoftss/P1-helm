@@ -1,0 +1,12 @@
+app:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    issuer:
+      name: letsencrypt
+      scope: cluster
+    hosts:
+      - kubedashboard.vexoft.com
+    tls:
+      enabled: true
+      secretName: vexoft-com-tls-secret-kubedashboard
