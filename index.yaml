@@ -3,9 +3,9 @@ entries:
   jake-api-deploy:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-11-04T11:34:58.071824746Z"
+    created: "2024-11-15T22:23:51.823062311Z"
     description: A Helm chart for Kubernetes
-    digest: 85dc8c76b448fb4baeeef01d53f647d4acd2df9c8b8cf66558663f64282eca73
+    digest: 5e674c860564bd5483a0699d92df884711f4cd2dd43c84c86151ca91062f5b5e
     name: jake-api-deploy
     type: application
     urls:
@@ -14,12 +14,12 @@ entries:
   webapp:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-11-04T11:34:58.072003179Z"
+    created: "2024-11-15T22:23:51.823232689Z"
     description: Deploy webapp to Kubernetes cluster
-    digest: 907d4c9deb208757a955a164fd4c0ff070a93e7e6a81126160b2cecbf9b737c5
+    digest: 0b108478bc782e7b7f204976cee86e488ce5ffbd10eaa6647ec0c9d466feb510
     name: webapp
     type: application
     urls:
     - https://vexoftss.github.io/P1-helm/webapp-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-04T11:34:58.071472417Z"
+generated: "2024-11-15T22:23:51.822703411Z"
